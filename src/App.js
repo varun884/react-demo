@@ -1,3 +1,4 @@
+import Effect from './Effect';
 import Form from './Form';
 import State from './State';
 import TextInput from './TextInput';
@@ -9,7 +10,8 @@ function App() {
     // <State />
     // <TextInput />
     // <Form />
-    <Todo/>
+    // <Todo/>
+    <Effect />
   );
 }
 

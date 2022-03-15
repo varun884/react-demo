@@ -2,38 +2,71 @@ import React,{useState} from 'react'
 
 const Todo = () => {
 
-    const [todo,setTodo] = useState('')
-    
-    // const [todos,setTodos] = useState([])
+    var [todo,setTodo] = useState('');
+    var [todos,setTodos] = useState([]);
+    var [btntext,setBtnText] = useState('Add Todo')
+    var [mode,setMode] = useState(0)
+    var [index,setIndex] = useState(null)
+    // arr = ['hi','bye']
+    // arr = [{name:'hi',time:'2'}]
 
-    const [todos,setTodos] = useState({items:[]})
+    var frmSubmit =(e)=>{
+        e.preventDefault();
+        // console.log(todo);
 
-    const frmSubmit = (e) => {
-        e.preventDefault()
-        var _arr = todos.items
-        _arr.push(todo)
-        // console.log(_arr)
-
-        // setTodos(_arr)
-
-        // setTodos([...todos,todo])
-
-        setTodos({items:_arr})
+        // var temparr = todos;
+        // temparr.push(todo);
+        // setTodos(temparr);
+        if(mode === 0) {
+            setTodos([...todos,todo]);
+            setTodo('')
+        }
+        else if(mode === 1) {
+            var _arr = todos
+            _arr.splice(index,1,todo)
+            setTodos([..._arr])
+            setTodo('')
+        }
     }
+
+
+    const btnEdit = (index) => {
+        setMode(1)
+        setBtnText('Edit Todo')
+        setTodo(todos[index])
+        setIndex(index)
+    }
+
+    const btnDelete = (index) => {
+        var _arr = todos
+        todos.splice(index,1)
+        setTodos([...todos])
+    }
+
 
   return (
     <div>
-        <h1>TODO APP</h1>
-
-        <form onSubmit={frmSubmit}>
-            <input type='text' value={todo} onChange={e => setTodo(e.target.value)}/>
-            <input type='submit' value='Add Todo'/>
+        <form onSubmit={frmSubmit} >
+            <input type='text' value={todo} onChange={e =>{setTodo(e.target.value) }} />
+            <input type='submit' value={btntext} />
         </form>
-            <ol>
+
+        <h1>list</h1>
+
+        <ol>
             {
-                todos.items.map((item,index) => <li>{item}</li>)
+                todos.map(
+                    (item,index)=> {
+                    return (
+                        <>
+                            <li>{item}</li>
+                            <button onClick={() => btnEdit(index)}>Edit</button>
+                            <button onClick={() => btnDelete(index)}>Delete</button>
+                        </>
+                        )
+                    })
             }
-            </ol>
+        </ol>
 
     </div>
   )
