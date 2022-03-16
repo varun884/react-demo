@@ -1,3 +1,4 @@
+import API from './API';
 import Effect from './Effect';
 import Form from './Form';
 import State from './State';
@@ -11,7 +12,8 @@ function App() {
     // <TextInput />
     // <Form />
     // <Todo/>
-    <Effect />
+    // <Effect />
+    <API />
   );
 }
 
