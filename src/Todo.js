@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import axios from 'axios'
 
 const Todo = () => {
 
@@ -10,7 +11,7 @@ const Todo = () => {
     // arr = ['hi','bye']
     // arr = [{name:'hi',time:'2'}]
 
-    var frmSubmit =(e)=>{
+    var frmSubmit = async (e) =>{
         e.preventDefault();
         // console.log(todo);
 
@@ -18,8 +19,12 @@ const Todo = () => {
         // temparr.push(todo);
         // setTodos(temparr);
         if(mode === 0) {
+            var toSend = [...todos,todo]
             setTodos([...todos,todo]);
             setTodo('')
+            console.log(todos)
+            const res = await axios.post('http://localhost:8900/savetodo',{toSend})
+
         }
         else if(mode === 1) {
             var _arr = todos

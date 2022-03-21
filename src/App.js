@@ -11,9 +11,9 @@ function App() {
     // <State />
     // <TextInput />
     // <Form />
-    // <Todo/>
+    <Todo/>
     // <Effect />
-    <API />
+    // <API />
   );
 }
 
